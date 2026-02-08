@@ -1,0 +1,28 @@
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const chatRouter = require('./routes/chat');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Middleware
+app.use(cors({
+  origin: 'http://localhost:5173', // Vite 前端的網址
+  credentials: true
+}));
+app.use(express.json());
+
+// Routes
+app.use('/api/chat', chatRouter);
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'AI Agent Backend is running' });
+});
+
+// 啟動伺服器
+app.listen(PORT, () => {
+  console.log(`🚀 Backend server running on http://localhost:${PORT}`);
+  console.log(`📡 Accepting requests from http://localhost:5173`);
+});
