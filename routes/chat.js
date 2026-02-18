@@ -110,6 +110,14 @@ const model = genAI.getGenerativeModel({
       });
     }
 
+    // 503 服務暫時無法使用
+    if (error.status === 503) {
+        return res.status(503).json({
+        error: 'SERVICE_UNAVAILABLE',
+        message: 'AI service is temporarily overloaded. Please try again in a moment.',
+        });
+    }
+
     res.status(500).json({ 
       error: 'UNKNOWN_ERROR',
       message: 'An unexpected error occurred.',
