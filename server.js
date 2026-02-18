@@ -8,7 +8,10 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
-  origin: true, // 暫時允許所有來源
+  origin: [
+    'http://localhost:5173',                // 本地開發
+    'https://ai-agent-pi-nine.vercel.app',  // 生產環境
+  ],
   credentials: true
 }));
 app.use(express.json());
