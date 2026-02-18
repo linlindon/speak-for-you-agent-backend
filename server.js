@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // Vite 前端的網址
+  origin: true, // 暫時允許所有來源
   credentials: true
 }));
 app.use(express.json());
